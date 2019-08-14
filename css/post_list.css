@@ -1,0 +1,24 @@
+.post_list {
+  background: url("https://images.unsplash.com/photo-1485918452899-9b7cb70dbfdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80")
+    center no-repeat;
+  background-size: cover;
+  height: inherit;
+  padding: 20px;
+  overflow: auto;
+  height: 100%;
+}
+
+.bubble {
+  margin: 50px auto;
+  width: 65vw;
+}
+.bubble .bubble-title a {
+  color: black;
+}
+.bubble .bubble-content {
+  background-color: transparent;
+}
+
+.bubble .bubble-content p {
+  margin: 0;
+}

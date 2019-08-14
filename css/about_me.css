@@ -10,36 +10,3 @@ h1 {
   background-position: center;
   padding: 20px;
 }
-
-.bubble {
-  border-radius: 10px;
-  margin: 100px auto;
-  width: 80vw;
-  text-align: left;
-  background-color: rgba(235, 235, 235, 0.527);
-  padding: 30px 0;
-}
-
-.bubble h1 {
-  display: inline-block;
-}
-
-.bubble .bubble-title {
-  text-align: center;
-}
-.bubble-title > h1 {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-.bubble-content {
-  padding: 0 5%;
-}
-
-.divider {
-  height: 1px;
-  width: 80%;
-  background-color: black;
-  margin: 0 auto;
-  margin-bottom: 3%;
-}

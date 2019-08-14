@@ -1,0 +1,147 @@
+/* COMMON CSS */
+
+html,
+body {
+  background-color: gray;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+}
+
+h1 {
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  max-width: 95vw;
+  width: 95vw;
+  height: inherit;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0px;
+  height: 40px;
+  width: inherit;
+  max-width: 95vw;
+  line-height: 40px;
+  background-color: black;
+}
+.header a {
+  text-decoration: none;
+  color: black;
+}
+.logo {
+  display: inline-block;
+  padding-left: 40px;
+}
+.logo > a {
+  color: white;
+  font-size: 25px;
+  font-family: "Lobster", cursive;
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  padding-right: 40px;
+}
+
+.nav-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  list-style: none;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+.nav-item a {
+  color: white;
+}
+
+.nav-item a:hover {
+  color: tomato;
+  padding-bottom: 1px;
+  border-bottom: 1px solid tomato;
+}
+
+.nav-btn {
+  display: none;
+}
+
+/* MAIN CONTENT */
+.content {
+  padding-top: 40px;
+  width: 100%;
+  height: inherit;
+  padding-bottom: 40px;
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  height: 20px;
+  width: inherit;
+  background-color: black;
+  bottom: 0;
+  width: inherit;
+}
+
+.footer p {
+  color: white;
+  text-align: right;
+  padding-right: 40px;
+  margin: 0;
+  line-height: 20px;
+}
+
+/* nav responsive */
+@media (max-width: 700px) {
+  .nav-btn {
+    display: block;
+    height: 40px;
+    background-color: transparent;
+    float: right;
+    width: 60px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .nav-btn:focus {
+    outline: none;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: inherit;
+    max-width: 95vh;
+    background-color: black;
+    padding: 0;
+    border-top: 1px solid rgba(184, 184, 184, 0.76);
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+}

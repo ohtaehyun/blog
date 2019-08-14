@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- {% load static %} -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/index.css' %}" /> -->
+    <link rel="stylesheet" href="../css/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <a href="">OthDev95's blog</a>
+        </div>
+        <div class="nav">
+          <ul class="nav-ul">
+            <li class="nav-item">
+              <a href="">About me</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="">Project</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="">Post</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="">Hi, ramji</a>
+            </li>
+          </ul>
+        </div>
+
+        <button class="nav-btn">=</button>
+      </div>
+      <div class="content">
+        <div class="hero">
+          <div class="hero-text">
+            <h1>Hi, There!</h1>
+            <br />
+            <h1>This is my first django blog</h1>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>contact: othdev95@gmail.com</p>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script>
+      $("button.nav-btn, ul li a").click(function() {
+        $("div.nav").toggleClass("mobile-nav");
+      });
+    </script>
+  </body>
+</html>

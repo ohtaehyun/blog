@@ -16,10 +16,9 @@ h1 {
 
 .container {
   position: relative;
-  max-width: 95vw;
-  width: 95vw;
+  max-width: 100vw;
+  width: 100vw;
   height: inherit;
-  margin: 0 auto;
   overflow: hidden;
 }
 
@@ -29,7 +28,7 @@ h1 {
   top: 0px;
   height: 40px;
   width: inherit;
-  max-width: 95vw;
+  max-width: 100vw;
   line-height: 40px;
   background-color: black;
 }

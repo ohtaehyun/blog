@@ -133,7 +133,6 @@ h1 {
     position: absolute;
     top: 40px;
     width: inherit;
-    max-width: 95vw;
     background-color: black;
     padding: 0;
     border-top: 1px solid rgba(184, 184, 184, 0.76);

@@ -26,10 +26,10 @@ h1 {
 .header {
   position: fixed;
   top: 0px;
-  height: 40px;
+  height: 60px;
   width: inherit;
   max-width: 100vw;
-  line-height: 40px;
+  line-height: 60px;
   background-color: black;
 }
 .header a {
@@ -96,10 +96,12 @@ h1 {
 .footer {
   position: fixed;
   height: 30px;
+  line-height: 30px;
   width: inherit;
   background-color: black;
   bottom: 0;
   width: inherit;
+  padding: 10px;
 }
 
 .footer p {
@@ -107,7 +109,6 @@ h1 {
   text-align: right;
   padding-right: 40px;
   margin: 0;
-  line-height: 20px;
 }
 
 /* nav responsive */
@@ -122,6 +123,7 @@ h1 {
     color: white;
     cursor: pointer;
     font-size: 20px;
+    margin-top: 10px;
   }
 
   .nav-btn:focus {
@@ -131,8 +133,9 @@ h1 {
   .nav {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 60px;
     width: inherit;
+    max-width: 100vw;
     background-color: black;
     padding: 0;
     border-top: 1px solid rgba(184, 184, 184, 0.76);

@@ -1,0 +1,39 @@
+.content {
+  background: url("https://images.unsplash.com/photo-1504700610630-ac6aba3536d3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80")
+    center no-repeat;
+  background-size: cover;
+  width: inherit;
+  height: inherit;
+}
+
+.clock h1 {
+  text-align: center;
+  padding: 20vh 100px 40px 100px;
+  font-size: 80px;
+  text-shadow: 1px 1px 1px silver;
+  color: white;
+}
+
+.greeting h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  text-shadow: 1px 1px 1px silver;
+  color: white;
+}
+.greeting {
+  text-align: center;
+}
+
+.greeting input {
+  height: 30px;
+  font-size: 40px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}

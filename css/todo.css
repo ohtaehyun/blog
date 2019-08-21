@@ -6,9 +6,11 @@
   height: inherit;
 }
 
+.clock {
+  padding: 20vh 5vw;
+}
 .clock h1 {
   text-align: center;
-  padding: 20vh 100px 40px 100px;
   font-size: 80px;
   text-shadow: 1px 1px 1px silver;
   color: white;
@@ -26,7 +28,7 @@
 }
 
 .greeting input {
-  height: 30px;
+  height: 45px;
   font-size: 40px;
 }
 
@@ -36,4 +38,20 @@
 
 .show {
   display: inline-block;
+}
+
+@media (max-width: 700px) {
+  .clock h1 {
+    font-size: 3rem;
+  }
+
+  .greeting h1 {
+    font-size: 2rem;
+  }
+
+  .greeting input {
+    height: 5vh;
+    font-size: 1.2rem;
+    max-width: 50%;
+  }
 }

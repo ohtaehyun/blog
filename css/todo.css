@@ -48,6 +48,8 @@
   text-shadow: 1px 1px 1px silver;
   color: white;
   background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .weather h1 {

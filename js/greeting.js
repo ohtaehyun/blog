@@ -24,7 +24,7 @@ function init() {
     form.addEventListener("submit", handleSubmit);
     input.classList.add(SHOW);
   } else {
-    h1.innerText = `Hello ${currentName}`;
+    h1.innerText = `Hi, ${currentName}`;
     h1.classList.add(SHOW);
   }
 }

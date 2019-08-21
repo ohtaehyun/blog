@@ -6,6 +6,14 @@
   height: inherit;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .clock {
   padding: 20vh 5vw 5px 5vw;
 }
@@ -22,6 +30,8 @@
   font-size: 40px;
   text-shadow: 1px 1px 1px silver;
   color: white;
+
+  animation: fadeIn 0.7s;
 }
 .greeting {
   text-align: center;
@@ -58,6 +68,7 @@
   font-size: 40px;
   text-shadow: 1px 1px 1px silver;
   color: white;
+  animation: fadeIn 0.7s;
 }
 @media (max-width: 700px) {
   .clock h1 {

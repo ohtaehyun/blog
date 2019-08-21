@@ -7,7 +7,7 @@
 }
 
 .clock {
-  padding: 20vh 5vw;
+  padding: 20vh 5vw 5px 5vw;
 }
 .clock h1 {
   text-align: center;
@@ -39,7 +39,24 @@
 .show {
   display: inline-block;
 }
+.weather {
+  text-align: center;
+}
 
+.weather button {
+  font-size: 40px;
+  text-shadow: 1px 1px 1px silver;
+  color: white;
+  background-color: transparent;
+}
+
+.weather h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  text-shadow: 1px 1px 1px silver;
+  color: white;
+}
 @media (max-width: 700px) {
   .clock h1 {
     font-size: 3rem;
@@ -53,5 +70,11 @@
     height: 5vh;
     font-size: 1.2rem;
     max-width: 50%;
+  }
+  .weather h1 {
+    font-size: 1.2rem;
+  }
+  .weather button {
+    font-size: 1.2rem;
   }
 }

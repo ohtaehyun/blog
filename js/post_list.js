@@ -22,7 +22,7 @@ function paintPostList(posts) {
 
 function init() {
   // dosomething
-  fetch("./json/post_list.json")
+  fetch("./blog/json/post_list.json")
     .then(function(response) {
       return response.json();
     })

@@ -2,7 +2,7 @@
 .hero {
   background-image: url("http://css3.zerois.net/images/image-back.jpg");
   background-size: cover;
-  height: inherit;
+  height: 100vh;
   background-position: center;
   padding: 10% 20% 0 20%;
 }

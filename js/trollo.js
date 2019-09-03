@@ -9,6 +9,14 @@ const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 let trolloList = [];
 
+function bubbleTitleBlur(event) {
+  const bubbleIdx = Array.from(row.children).indexOf(
+    this.parentNode.parentNode
+  );
+  trolloList[bubbleIdx].name = this.value;
+  localStorage.setItem("trolloList", JSON.stringify(trolloList));
+}
+
 function dropBtnClick(event) {
   this.parentNode.querySelector(".drops").classList.toggle(CLASS_DISPLAY_NONE);
 }
@@ -67,6 +75,9 @@ function addListBtnClick(event) {
   row.appendChild(bubble);
   bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
   bubble.querySelector(".add-card").addEventListener("click", addCardClick);
+  bubble
+    .querySelector(".bubble-title input")
+    .addEventListener("blur", bubbleTitleBlur);
   obj = {
     name: DEFAULT_LIST_NAME,
     cardList: []
@@ -92,6 +103,7 @@ function drawBubbles() {
     row.appendChild(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
+    bubble.querySelector("input").addEventListener("blur", bubbleTitleBlur);
     element.cardList.forEach(element2 => {
       card = document.createElement("div");
       card.classList.add(CLASS_CARD);

@@ -1,0 +1,114 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
+  background: url("https://images.unsplash.com/photo-1444944232907-0b9e9ace348c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80");
+  background-repeat: repeat;
+  background-size: cover;
+}
+.wrapper {
+  height: 100%;
+  overflow-x: scroll;
+}
+
+.bubble {
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  height: 25%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.bubble-title {
+  display: flex;
+  height: 40px;
+  padding: 5px;
+  position: relative;
+}
+
+.bubble-title input {
+  height: 30px;
+  width: 150px;
+  border: none;
+  background-color: transparent;
+}
+
+.bubble-title input:focus {
+  background-color: white;
+}
+
+.drop-btn {
+  border-radius: 5px;
+  height: 30px;
+  width: 40px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.drop-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.bubble-title h1 {
+  display: inline-block;
+}
+
+.row {
+  display: flex;
+}
+
+.display-none {
+  display: none;
+}
+
+.drops {
+  position: absolute;
+  top: 40px;
+  left: 150px;
+  width: 210px;
+  height: 80px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  padding: 2px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 1px 1px silver;
+  margin: 5px;
+}
+
+.card:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-text {
+  border: none;
+  outline: none;
+  margin: 5px;
+  background-color: transparent;
+  resize: none;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}

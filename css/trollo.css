@@ -16,6 +16,7 @@ body {
   background: url("https://images.unsplash.com/photo-1444944232907-0b9e9ace348c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80");
   background-repeat: repeat;
   background-size: cover;
+  overflow-x: scroll;
 }
 .wrapper {
   height: 100%;

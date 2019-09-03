@@ -85,6 +85,8 @@ function addListBtnClick(event) {
   trolloList.push(obj);
   bubbles = document.querySelectorAll(".bubble");
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
+  bubble.querySelector("input").focus();
+
   console.log(trolloList);
 }
 

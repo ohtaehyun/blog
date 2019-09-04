@@ -18,6 +18,7 @@ const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
 let trolloList = [];
+
 function deleteButtonClicked(delButton, bubbleIdx) {
   delButton.addEventListener("click", function() {
     trolloList.splice(bubbleIdx, 1);
@@ -56,7 +57,6 @@ function cardTextBlur(textarea, bubbleIdx, selfIdx, className) {
       trolloList[bubbleIdx].descList[selfIdx] = this.value;
       pToCardText(p, bubbleIdx, selfIdx, CLASS_DESC_TEXT);
     }
-    console.log(this.parentNode.children);
     this.parentNode.replaceChild(p, this);
   });
 }
@@ -133,6 +133,10 @@ function dropBtnClick(event) {
   this.parentNode.querySelector(".drops").classList.toggle(CLASS_DISPLAY_NONE);
 }
 
+function dropBtnBlur(event) {
+  this.parentNode.querySelector(".drops").classList.remove(CLASS_DISPLAY_NONE);
+}
+
 function cardSubmitClicked(event) {
   const bubbleIdx = Array.from(row.children).indexOf(
     this.parentNode.parentNode.parentNode
@@ -200,6 +204,7 @@ function addListBtnClick(event) {
   row.appendChild(bubble);
   bubbleIdx = Array.from(row.children).indexOf(bubble);
   bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
+  bubble.querySelector(".drop-btn").addEventListener("blur", dropBtnBlur);
   bubble.querySelector(".add-card").addEventListener("click", addCardClick);
   deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
   bubble
@@ -214,14 +219,11 @@ function addListBtnClick(event) {
   bubbles = document.querySelectorAll(".bubble");
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
   bubble.querySelector("input").focus();
-
-  console.log(trolloList);
 }
 
 function drawBubbles() {
   row.innerHTML = "";
   trolloList = JSON.parse(localStorage.getItem("trolloList"));
-  console.log("trollo.length", trolloList.length);
   trolloList.forEach(element => {
     const bubble = document.createElement("div");
     bubble.classList.add(CLASS_BUBBLE);
@@ -236,6 +238,8 @@ function drawBubbles() {
     row.appendChild(bubble);
     bubbleIdx = Array.from(row.children).indexOf(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
+
+    bubble.querySelector(".drop-btn").addEventListener("blur", dropBtnBlur);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
     bubble.querySelector("input").addEventListener("blur", bubbleTitleBlur);
     deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);

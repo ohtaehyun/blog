@@ -102,7 +102,7 @@ p {
 }
 
 .card {
-  padding: 2px;
+  padding: 8px;
   border-radius: 5px;
   background-color: white;
   box-shadow: 1px 1px silver;
@@ -210,4 +210,12 @@ p {
 }
 
 .card-submit {
+  width: 40px;
+  height: 20px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: rgba(46, 204, 113, 1);
 }

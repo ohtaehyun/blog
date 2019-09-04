@@ -12,6 +12,10 @@ body {
 p {
   overflow-wrap: break-word;
 }
+
+.modal input {
+  min-height: 100px;
+}
 .container {
   height: 100vh;
   max-height: 100vh;
@@ -165,4 +169,15 @@ p {
 
 .exit-button:hover {
   background-color: gray;
+}
+
+.divider {
+  height: 1px;
+  background-color: gray;
+  margin: 10px 0;
+}
+
+.desc-text,
+.card-text {
+  font-size: 0.8rem;
 }

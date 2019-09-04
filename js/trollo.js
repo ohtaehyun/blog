@@ -11,6 +11,8 @@ const CLASS_CARD_TEXT = "card-text";
 const CLASS_MODAL = "modal";
 const CLASS_EXIT_BUTTON = "exit-button";
 const CLASS_CARD_SUBMIT = "card-submit";
+const CLASS_DESC_TEXT = "desc-text";
+const CLASS_DIVIDER = "divider";
 const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
@@ -24,15 +26,31 @@ function exitButtonClicked(exitButton, bubbleIdx, selfIdx) {
   });
 }
 
-function cardTextBlur(textarea, bubbleIdx, selfIdx) {
-  textarea.addEventListener("blur", function() {
-    trolloList[bubbleIdx].cardList[selfIdx] = this.value;
+function pToCardText(p, bubbleIdx, selfIdx, className) {
+  p.addEventListener("click", function() {
+    const textarea = document.createElement("textarea");
+    textarea.classList.add(className);
+    textarea.value = this.textContent;
+    textarea.addEventListener("input", textareaHeightHandle);
+    cardTextBlur(textarea, bubbleIdx, selfIdx, className);
+    this.parentNode.replaceChild(textarea, p);
   });
 }
 
-function cardDescBlur(textarea, bubbleIdx, selfIdx) {
+function cardTextBlur(textarea, bubbleIdx, selfIdx, className) {
   textarea.addEventListener("blur", function() {
-    trolloList[bubbleIdx].descList[selfIdx] = this.value;
+    p = document.createElement("p");
+    p.classList.add(className);
+    p.textContent = this.value;
+    if (className === CLASS_CARD_TEXT) {
+      trolloList[bubbleIdx].cardList[selfIdx] = this.value;
+      pToCardText(p, bubbleIdx, selfIdx, CLASS_CARD_TEXT);
+    } else {
+      trolloList[bubbleIdx].descList[selfIdx] = this.value;
+      pToCardText(p, bubbleIdx, selfIdx, CLASS_DESC_TEXT);
+    }
+    console.log(this.parentNode.children);
+    this.parentNode.replaceChild(p, this);
   });
 }
 
@@ -48,32 +66,48 @@ function cardClicked(event) {
 
   const selfIdx = Array.from(this.parentNode.children).indexOf(this);
 
-  modalFrame = document.createElement("div");
+  const modalFrame = document.createElement("div");
   modalFrame.classList.add(CLASS_MODAL_FRAME);
-  modal = document.createElement("div");
+
+  const modal = document.createElement("div");
   modal.classList.add(CLASS_MODAL);
-  cardText = document.createElement("textarea");
+
+  const title = document.createElement("p");
+  title.textContent = "Card Title";
+
+  const cardText = document.createElement("p");
   cardText.textContent = this.querySelector(".card-text").textContent;
   cardText.addEventListener("input", textareaHeightHandle);
   cardText.classList.add(CLASS_CARD_TEXT);
-  cardTextBlur(cardText, bubbleIdx, selfIdx);
+  pToCardText(cardText, bubbleIdx, selfIdx, CLASS_CARD_TEXT);
 
-  small = document.createElement("small");
+  const small = document.createElement("small");
   small.textContent = "in list " + trolloList[bubbleIdx].name;
-  desText = document.createElement("textarea");
+
+  const divider = document.createElement("div");
+  divider.classList.add(CLASS_DIVIDER);
+
+  const desc = document.createElement("p");
+  desc.textContent = "Description";
+
+  const desText = document.createElement("p");
+  desText.classList.add(CLASS_DESC_TEXT);
   desText.textContent = trolloList[bubbleIdx].descList[selfIdx];
   desText.addEventListener("input", textareaHeightHandle);
-  cardDescBlur(desText, bubbleIdx, selfIdx);
+  pToCardText(desText, bubbleIdx, selfIdx, CLASS_DESC_TEXT);
 
-  exitButton = document.createElement("button");
+  const exitButton = document.createElement("button");
   exitButton.textContent = "X";
   exitButton.classList.add(CLASS_EXIT_BUTTON);
 
   exitButtonClicked(exitButton, bubbleIdx, selfIdx);
 
   modal.appendChild(exitButton);
+  modal.appendChild(title);
   modal.appendChild(cardText);
   modal.appendChild(small);
+  modal.appendChild(divider);
+  modal.appendChild(desc);
   modal.appendChild(desText);
 
   modalFrame.appendChild(modal);

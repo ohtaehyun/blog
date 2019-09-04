@@ -134,7 +134,6 @@ function dropBtnClick(event) {
 }
 
 function dropBtnBlur(event) {
-  console.log(this);
   this.classList.add(CLASS_DISPLAY_NONE);
 }
 

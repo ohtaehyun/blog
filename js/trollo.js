@@ -134,7 +134,7 @@ function dropBtnClick(event) {
 }
 
 function dropBtnBlur(event) {
-  this.parentNode.querySelector(".drops").classList.remove(CLASS_DISPLAY_NONE);
+  this.parentNode.querySelector(".drops").classList.add(CLASS_DISPLAY_NONE);
 }
 
 function cardSubmitClicked(event) {

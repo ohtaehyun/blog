@@ -134,7 +134,8 @@ function dropBtnClick(event) {
 }
 
 function dropBtnBlur(event) {
-  this.parentNode.querySelector(".drops").classList.add(CLASS_DISPLAY_NONE);
+  console.log(this);
+  this.classList.add(CLASS_DISPLAY_NONE);
 }
 
 function cardSubmitClicked(event) {
@@ -204,7 +205,7 @@ function addListBtnClick(event) {
   row.appendChild(bubble);
   bubbleIdx = Array.from(row.children).indexOf(bubble);
   bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
-  bubble.querySelector(".drop-btn").addEventListener("blur", dropBtnBlur);
+  bubble.querySelector(".drop-btn").addEventListener("focusout", dropBtnBlur);
   bubble.querySelector(".add-card").addEventListener("click", addCardClick);
   deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
   bubble
@@ -238,8 +239,7 @@ function drawBubbles() {
     row.appendChild(bubble);
     bubbleIdx = Array.from(row.children).indexOf(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
-
-    bubble.querySelector(".drop-btn").addEventListener("blur", dropBtnBlur);
+    bubble.querySelector(".drops").addEventListener("mouseleave", dropBtnBlur);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
     bubble.querySelector("input").addEventListener("blur", bubbleTitleBlur);
     deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);

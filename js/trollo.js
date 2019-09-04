@@ -205,7 +205,7 @@ function addListBtnClick(event) {
   row.appendChild(bubble);
   bubbleIdx = Array.from(row.children).indexOf(bubble);
   bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
-  bubble.querySelector(".drops").addEventListener("focusout", dropBtnBlur);
+  bubble.querySelector(".drops").addEventListener("mouseleave", dropBtnBlur);
   bubble.querySelector(".add-card").addEventListener("click", addCardClick);
   deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
   bubble

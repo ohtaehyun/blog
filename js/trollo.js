@@ -13,11 +13,18 @@ const CLASS_EXIT_BUTTON = "exit-button";
 const CLASS_CARD_SUBMIT = "card-submit";
 const CLASS_DESC_TEXT = "desc-text";
 const CLASS_DIVIDER = "divider";
+const CLASS_DEL_lIST = "del-list";
 const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
 let trolloList = [];
-
+function deleteButtonClicked(delButton, bubbleIdx) {
+  delButton.addEventListener("click", function() {
+    trolloList.splice(bubbleIdx, 1);
+    localStorage.setItem("trolloList", JSON.stringify(trolloList));
+    drawBubbles();
+  });
+}
 function exitButtonClicked(exitButton, bubbleIdx, selfIdx) {
   exitButton.addEventListener("click", function() {
     localStorage.setItem("trolloList", JSON.stringify(trolloList));
@@ -186,12 +193,15 @@ function addListBtnClick(event) {
   <button class="drop-btn">=</button>
   <div class="drops display-none">
     <button class="add-card" href="">Add Card</button>
+    <button class="del-list" href="">Del List</button>
   </div>
 </div><div class="bubble-content"></div>`;
 
   row.appendChild(bubble);
+  bubbleIdx = Array.from(row.children).indexOf(bubble);
   bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
   bubble.querySelector(".add-card").addEventListener("click", addCardClick);
+  deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
   bubble
     .querySelector(".bubble-title input")
     .addEventListener("blur", bubbleTitleBlur);
@@ -220,12 +230,15 @@ function drawBubbles() {
     <button class="drop-btn">=</button>
     <div class="drops display-none">
       <button class="add-card" href="">Add Card</button>
+      <button class="del-list" href="">Del List</button>
     </div>
   </div><div class="bubble-content"></div>`;
     row.appendChild(bubble);
+    bubbleIdx = Array.from(row.children).indexOf(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
     bubble.querySelector("input").addEventListener("blur", bubbleTitleBlur);
+    deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
     element.cardList.forEach(element2 => {
       card = document.createElement("div");
       card.classList.add(CLASS_CARD);

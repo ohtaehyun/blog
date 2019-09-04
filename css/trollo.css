@@ -38,7 +38,7 @@ p {
   height: 25%;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  margin-right: 20px;
+  margin: 0 10px;
 }
 
 .bubble-title {
@@ -90,7 +90,7 @@ p {
   position: absolute;
   top: 40px;
   left: 150px;
-  width: 210px;
+  width: 150px;
   height: 80px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -123,7 +123,17 @@ p {
   overflow-wrap: break-word;
 }
 .add-list-btn {
-  margin-top: 70px;
+  margin-top: 100px;
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  height: 40px;
+  width: 90px;
+  font-size: 20px;
+  background: rgba(236, 240, 241, 0.9);
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 1px 1px silver;
 }
 
 .modal-frame {
@@ -180,4 +190,24 @@ p {
 .desc-text,
 .card-text {
   font-size: 0.8rem;
+}
+
+.add-card,
+.del-list {
+  border: none;
+  outline: none;
+  height: 40px;
+  width: 150px;
+  font-size: 20px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-card:hover,
+.del-list:hover {
+  background-color: rgba(236, 240, 241, 0.9);
+}
+
+.card-submit {
 }

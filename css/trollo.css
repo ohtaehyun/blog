@@ -9,6 +9,9 @@ body {
   padding: 0;
   margin: 0;
 }
+p {
+  overflow-wrap: break-word;
+}
 .container {
   height: 100vh;
   max-height: 100vh;
@@ -107,8 +110,8 @@ body {
 }
 
 .card-text {
-  border: none;
-  outline: none;
+  /* border: none;
+  outline: none; */
   margin: 5px;
   background-color: transparent;
   resize: none;
@@ -117,4 +120,49 @@ body {
 }
 .add-list-btn {
   margin-top: 70px;
+}
+
+.modal-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.modal {
+  border-radius: 5px;
+  background-color: #f4f5f7;
+  height: 60vh;
+  width: 40vw;
+  margin: 20vh auto;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.modal textarea {
+  background-color: transparent;
+  resize: none;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.exit-button {
+  float: right;
+  border: none;
+  outline: none;
+  color: black;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.exit-button:hover {
+  background-color: gray;
 }

@@ -19,6 +19,60 @@ const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
 let trolloList = [];
 
+function cardDragOver(event) {
+  event.preventDefault();
+}
+
+function cardDropped(event) {
+  event.preventDefault();
+  const draggedBubbleIdx = event.dataTransfer.getData("bubbleIdx");
+  const draggedSelfIdx = event.dataTransfer.getData("selfIdx");
+
+  if (Array.from(this.classList).indexOf("bubble-title") != -1) {
+    const bubbleIdx = Array.from(row.children).indexOf(this.parentNode);
+    trolloList[bubbleIdx].cardList.splice(
+      0,
+      0,
+      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
+    );
+    trolloList[bubbleIdx].descList.splice(
+      0,
+      0,
+      trolloList[draggedBubbleIdx].descList[draggedSelfIdx]
+    );
+  } else {
+    const bubbleIdx = Array.from(row.children).indexOf(
+      this.parentNode.parentNode
+    );
+    const selfIdx = Array.from(this.parentNode.children).indexOf(this);
+    trolloList[bubbleIdx].cardList.splice(
+      selfIdx + 1,
+      0,
+      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
+    );
+    trolloList[bubbleIdx].descList.splice(
+      selfIdx + 1,
+      0,
+      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
+    );
+  }
+
+  trolloList[draggedBubbleIdx].cardList.splice(draggedSelfIdx, 1);
+  trolloList[draggedBubbleIdx].descList.splice(draggedSelfIdx, 1);
+  localStorage.setItem("trolloList", JSON.stringify(trolloList));
+  drawBubbles();
+}
+
+function cardDragStart(event) {
+  const bubbleIdx = Array.from(row.children).indexOf(
+    this.parentNode.parentNode
+  );
+  const selfIdx = Array.from(this.parentNode.children).indexOf(this);
+  event.dataTransfer.dropEffect = "move";
+  event.dataTransfer.setData("bubbleIdx", bubbleIdx);
+  event.dataTransfer.setData("selfIdx", selfIdx);
+}
+
 function delCardHandler(delCardBtn, bubbleIdx, selfIdx) {
   delCardBtn.addEventListener("click", function() {
     trolloList[bubbleIdx].cardList.splice(selfIdx, 1);
@@ -172,6 +226,8 @@ function cardSubmitClicked(event) {
   }</p>`;
 }
 
+//  @@@@@@@@@@@@@@ REFACTORING NEED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 function addCardClick(event) {
   const bubbleIdx = Array.from(row.children).indexOf(
     this.parentNode.parentNode.parentNode
@@ -181,6 +237,9 @@ function addCardClick(event) {
   const card = document.createElement("div");
   card.classList.add(CLASS_CARD);
   card.setAttribute("draggable", "true");
+  card.addEventListener("dragstart", cardDragStart);
+  card.addEventListener("dragover", cardDragOver);
+  card.addEventListener("drop", cardDropped);
 
   const cardText = document.createElement("textarea");
   cardText.classList.add(CLASS_CARD_TEXT);
@@ -204,6 +263,7 @@ function addCardClick(event) {
   trolloList[bubbleIdx].descList.push(DEFAULT_DESC_TEXT);
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
 }
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 function addListBtnClick(event) {
   const obj = {
@@ -225,17 +285,21 @@ function drawBubbles() {
   trolloList.forEach(element => {
     const bubble = document.createElement("div");
     bubble.classList.add(CLASS_BUBBLE);
-    bubble.innerHTML = ` <div class="bubble-title">
+    bubble.innerHTML = ` <div class="bubble-title" droppable="true">
     <input type="text" name="" id="" value=${element.name} />
     <button class="drop-btn">=</button>
     <div class="drops display-none">
       <button class="add-card" href="">Add Card</button>
       <button class="del-list" href="">Del List</button>
     </div>
-  </div><div class="bubble-content" droppable="true"></div>`;
+  </div><div class="bubble-content"></div>`;
     row.appendChild(bubble);
     bubbleIdx = Array.from(row.children).indexOf(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
+    bubble.querySelector(".bubble-title").addEventListener("drop", cardDropped);
+    bubble
+      .querySelector(".bubble-title")
+      .addEventListener("dragover", cardDragOver);
     bubble.querySelector(".drops").addEventListener("mouseleave", dropBtnBlur);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
     bubble.querySelector("input").addEventListener("blur", bubbleTitleBlur);
@@ -243,8 +307,13 @@ function drawBubbles() {
     element.cardList.forEach(element2 => {
       card = document.createElement("div");
       card.setAttribute("draggable", "true");
+      card.setAttribute("droppable", "true");
       card.classList.add(CLASS_CARD);
       card.innerHTML = `<p class="card-text" name="" id="" >${element2}</p>`;
+      card.addEventListener("dragstart", cardDragStart);
+      card.addEventListener("dragover", cardDragOver);
+      card.addEventListener("drop", cardDropped);
+
       bubble.querySelector(".bubble-content").appendChild(card);
       card.addEventListener("click", cardClicked);
     });

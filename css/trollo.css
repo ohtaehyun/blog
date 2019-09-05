@@ -236,3 +236,7 @@ p {
   font-size: 15px;
   box-shadow: 1px 1px silver;
 }
+
+.card:hover {
+  opacity: 1;
+}

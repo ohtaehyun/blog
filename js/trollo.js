@@ -1,7 +1,6 @@
 const row = document.querySelector(".row");
 const addListBtn = document.querySelector(".add-list-btn");
 const body = document.querySelector("body");
-let bubbles = document.querySelectorAll(".bubble");
 
 const CLASS_BUBBLE = "bubble";
 const CLASS_DISPLAY_NONE = "display-none";
@@ -37,12 +36,11 @@ function deleteButtonClicked(delButton, bubbleIdx) {
     drawBubbles();
   });
 }
-function exitButtonClicked(exitButton, bubbleIdx, selfIdx) {
-  exitButton.addEventListener("click", function() {
-    localStorage.setItem("trolloList", JSON.stringify(trolloList));
-    drawBubbles();
-    body.removeChild(exitButton.parentNode.parentNode);
-  });
+
+function exitButtonClicked() {
+  localStorage.setItem("trolloList", JSON.stringify(trolloList));
+  drawBubbles();
+  body.removeChild(body.lastChild);
 }
 
 function pToCardText(p, bubbleIdx, selfIdx, className) {
@@ -53,6 +51,7 @@ function pToCardText(p, bubbleIdx, selfIdx, className) {
     textarea.addEventListener("input", textareaHeightHandle);
     cardTextBlur(textarea, bubbleIdx, selfIdx, className);
     this.parentNode.replaceChild(textarea, p);
+    textarea.focus();
   });
 }
 
@@ -117,7 +116,7 @@ function cardClicked(event) {
   const exitButton = document.createElement("button");
   exitButton.textContent = "X";
   exitButton.classList.add(CLASS_EXIT_BUTTON);
-  exitButtonClicked(exitButton, bubbleIdx, selfIdx);
+  exitButton.addEventListener("click", exitButtonClicked);
 
   const delCardBtn = document.createElement("button");
   delCardBtn.textContent = "Delete Card";
@@ -179,16 +178,17 @@ function addCardClick(event) {
   );
 
   this.parentNode.classList.add(CLASS_DISPLAY_NONE);
-  card = document.createElement("div");
+  const card = document.createElement("div");
   card.classList.add(CLASS_CARD);
+  card.setAttribute("draggable", "true");
 
-  cardText = document.createElement("textarea");
+  const cardText = document.createElement("textarea");
   cardText.classList.add(CLASS_CARD_TEXT);
   cardText.textContent = DEFAULT_CARD_TEXT;
   cardText.addEventListener("input", textareaHeightHandle);
   cardText.addEventListener("blur", cardSubmitClicked);
 
-  cardSubmit = document.createElement("button");
+  const cardSubmit = document.createElement("button");
   cardSubmit.classList.add(CLASS_CARD_SUBMIT);
   cardSubmit.addEventListener("click", cardSubmitClicked);
   cardSubmit.textContent = "save";
@@ -206,36 +206,18 @@ function addCardClick(event) {
 }
 
 function addListBtnClick(event) {
-  const bubble = document.createElement("div");
-  bubble.classList.add(CLASS_BUBBLE);
-  bubble.innerHTML = ` <div class="bubble-title">
-  <input type="text" name="" id="" value=${DEFAULT_LIST_NAME} />
-  <button class="drop-btn">=</button>
-  <div class="drops display-none">
-    <button class="add-card" href="">Add Card</button>
-    <button class="del-list" href="">Del List</button>
-  </div>
-</div><div class="bubble-content"></div>`;
-
-  row.appendChild(bubble);
-  bubbleIdx = Array.from(row.children).indexOf(bubble);
-  bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
-  bubble.querySelector(".drops").addEventListener("mouseleave", dropBtnBlur);
-  bubble.querySelector(".add-card").addEventListener("click", addCardClick);
-  deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
-  bubble
-    .querySelector(".bubble-title input")
-    .addEventListener("blur", bubbleTitleBlur);
   const obj = {
     name: DEFAULT_LIST_NAME,
     cardList: [],
     descList: []
   };
   trolloList.push(obj);
-  bubbles = document.querySelectorAll(".bubble");
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
-  bubble.querySelector("input").focus();
+  drawBubbles();
+  row.lastChild.querySelector(".bubble-title input").focus();
 }
+
+// @@@@@@@@@@@@@@@@@@ REFACTORING NEED BELOW THIS COMMENT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 function drawBubbles() {
   row.innerHTML = "";
@@ -243,14 +225,14 @@ function drawBubbles() {
   trolloList.forEach(element => {
     const bubble = document.createElement("div");
     bubble.classList.add(CLASS_BUBBLE);
-    bubble.innerHTML = ` <div class="bubble-title" droppable="true">
+    bubble.innerHTML = ` <div class="bubble-title">
     <input type="text" name="" id="" value=${element.name} />
     <button class="drop-btn">=</button>
     <div class="drops display-none">
       <button class="add-card" href="">Add Card</button>
       <button class="del-list" href="">Del List</button>
     </div>
-  </div><div class="bubble-content"></div>`;
+  </div><div class="bubble-content" droppable="true"></div>`;
     row.appendChild(bubble);
     bubbleIdx = Array.from(row.children).indexOf(bubble);
     bubble.querySelector(".drop-btn").addEventListener("click", dropBtnClick);
@@ -268,6 +250,7 @@ function drawBubbles() {
     });
   });
 }
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 function init() {
   addListBtn.addEventListener("click", addListBtnClick);

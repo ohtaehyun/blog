@@ -14,10 +14,21 @@ const CLASS_CARD_SUBMIT = "card-submit";
 const CLASS_DESC_TEXT = "desc-text";
 const CLASS_DIVIDER = "divider";
 const CLASS_DEL_lIST = "del-list";
+const CLASS_DEL_CARD = "del-card";
 const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
 let trolloList = [];
+
+function delCardHandler(delCardBtn, bubbleIdx, selfIdx) {
+  delCardBtn.addEventListener("click", function() {
+    trolloList[bubbleIdx].cardList.splice(selfIdx, 1);
+    trolloList[bubbleIdx].descList.splice(selfIdx, 1);
+    localStorage.setItem("trolloList", JSON.stringify(trolloList));
+    body.removeChild(body.lastChild);
+    drawBubbles();
+  });
+}
 
 function deleteButtonClicked(delButton, bubbleIdx) {
   delButton.addEventListener("click", function() {
@@ -106,8 +117,12 @@ function cardClicked(event) {
   const exitButton = document.createElement("button");
   exitButton.textContent = "X";
   exitButton.classList.add(CLASS_EXIT_BUTTON);
-
   exitButtonClicked(exitButton, bubbleIdx, selfIdx);
+
+  const delCardBtn = document.createElement("button");
+  delCardBtn.textContent = "Delete Card";
+  delCardBtn.classList.add(CLASS_DEL_CARD);
+  delCardHandler(delCardBtn, bubbleIdx, selfIdx);
 
   modal.appendChild(exitButton);
   modal.appendChild(title);
@@ -116,6 +131,7 @@ function cardClicked(event) {
   modal.appendChild(divider);
   modal.appendChild(desc);
   modal.appendChild(desText);
+  modal.appendChild(delCardBtn);
 
   modalFrame.appendChild(modal);
   body.appendChild(modalFrame);
@@ -227,7 +243,7 @@ function drawBubbles() {
   trolloList.forEach(element => {
     const bubble = document.createElement("div");
     bubble.classList.add(CLASS_BUBBLE);
-    bubble.innerHTML = ` <div class="bubble-title">
+    bubble.innerHTML = ` <div class="bubble-title" droppable="true">
     <input type="text" name="" id="" value=${element.name} />
     <button class="drop-btn">=</button>
     <div class="drops display-none">
@@ -244,6 +260,7 @@ function drawBubbles() {
     deleteButtonClicked(bubble.querySelector(".del-list"), bubbleIdx);
     element.cardList.forEach(element2 => {
       card = document.createElement("div");
+      card.setAttribute("draggable", "true");
       card.classList.add(CLASS_CARD);
       card.innerHTML = `<p class="card-text" name="" id="" >${element2}</p>`;
       bubble.querySelector(".bubble-content").appendChild(card);

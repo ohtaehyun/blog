@@ -27,38 +27,25 @@ function cardDropped(event) {
   event.preventDefault();
   const draggedBubbleIdx = event.dataTransfer.getData("bubbleIdx");
   const draggedSelfIdx = event.dataTransfer.getData("selfIdx");
+  console.log(draggedSelfIdx);
+  const cardText = trolloList[draggedBubbleIdx].cardList[draggedSelfIdx];
+  const descText = trolloList[draggedBubbleIdx].descList[draggedSelfIdx];
+
+  trolloList[draggedBubbleIdx].cardList.splice(draggedSelfIdx, 1);
+  trolloList[draggedBubbleIdx].descList.splice(draggedSelfIdx, 1);
 
   if (Array.from(this.classList).indexOf("bubble-title") != -1) {
     const bubbleIdx = Array.from(row.children).indexOf(this.parentNode);
-    trolloList[bubbleIdx].cardList.splice(
-      0,
-      0,
-      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
-    );
-    trolloList[bubbleIdx].descList.splice(
-      0,
-      0,
-      trolloList[draggedBubbleIdx].descList[draggedSelfIdx]
-    );
+    trolloList[bubbleIdx].cardList.splice(0, 0, cardText);
+    trolloList[bubbleIdx].descList.splice(0, 0, descText);
   } else {
     const bubbleIdx = Array.from(row.children).indexOf(
       this.parentNode.parentNode
     );
     const selfIdx = Array.from(this.parentNode.children).indexOf(this);
-    trolloList[bubbleIdx].cardList.splice(
-      selfIdx + 1,
-      0,
-      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
-    );
-    trolloList[bubbleIdx].descList.splice(
-      selfIdx + 1,
-      0,
-      trolloList[draggedBubbleIdx].cardList[draggedSelfIdx]
-    );
+    trolloList[bubbleIdx].cardList.splice(selfIdx + 1, 0, cardText);
+    trolloList[bubbleIdx].descList.splice(selfIdx + 1, 0, descText);
   }
-
-  trolloList[draggedBubbleIdx].cardList.splice(draggedSelfIdx, 1);
-  trolloList[draggedBubbleIdx].descList.splice(draggedSelfIdx, 1);
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
   drawBubbles();
 }

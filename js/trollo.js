@@ -27,7 +27,6 @@ function cardDropped(event) {
   event.preventDefault();
   const draggedBubbleIdx = event.dataTransfer.getData("bubbleIdx");
   const draggedSelfIdx = event.dataTransfer.getData("selfIdx");
-  console.log(draggedSelfIdx);
   const cardText = trolloList[draggedBubbleIdx].cardList[draggedSelfIdx];
   const descText = trolloList[draggedBubbleIdx].descList[draggedSelfIdx];
 
@@ -219,7 +218,6 @@ function cardSubmitClicked(event) {
 }
 
 //  @@@@@@@@@@@@@@ REFACTORING NEED @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 function addCardClick(event) {
   const bubbleIdx = Array.from(row.children).indexOf(
     this.parentNode.parentNode.parentNode

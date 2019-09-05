@@ -43,8 +43,13 @@ function cardDropped(event) {
       this.parentNode.parentNode
     );
     const selfIdx = Array.from(this.parentNode.children).indexOf(this);
-    trolloList[bubbleIdx].cardList.splice(selfIdx + 1, 0, cardText);
-    trolloList[bubbleIdx].descList.splice(selfIdx + 1, 0, descText);
+    if (bubbleIdx == draggedBubbleIdx) {
+      trolloList[bubbleIdx].cardList.splice(selfIdx, 0, cardText);
+      trolloList[bubbleIdx].descList.splice(selfIdx, 0, descText);
+    } else {
+      trolloList[bubbleIdx].cardList.splice(selfIdx + 1, 0, cardText);
+      trolloList[bubbleIdx].descList.splice(selfIdx + 1, 0, descText);
+    }
   }
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
   drawBubbles();

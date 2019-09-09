@@ -1,6 +1,7 @@
 const row = document.querySelector(".row");
 const addListBtn = document.querySelector(".add-list-btn");
 const body = document.querySelector("body");
+const wrapper = document.querySelector(".wrapper");
 
 const CLASS_BUBBLE = "bubble";
 const CLASS_DISPLAY_NONE = "display-none";
@@ -14,13 +15,17 @@ const CLASS_DESC_TEXT = "desc-text";
 const CLASS_DIVIDER = "divider";
 const CLASS_DEL_lIST = "del-list";
 const CLASS_DEL_CARD = "del-card";
+
 const DEFAULT_LIST_NAME = "SOMETHING";
 const DEFAULT_CARD_TEXT = "SOMETHING TO DO";
 const DEFAULT_DESC_TEXT = "DESCRIPTION HERE";
-let trolloList = [];
 
+let trolloList = [];
+let moveWrapper = false;
+let wrapperX;
 function cardDragOver(event) {
   event.preventDefault();
+  moveWrapper = false;
 }
 
 function cardDropped(event) {
@@ -52,6 +57,7 @@ function cardDropped(event) {
   }
   localStorage.setItem("trolloList", JSON.stringify(trolloList));
   drawBubbles();
+  moveWrapper = false;
 }
 
 function cardDragStart(event) {
@@ -62,6 +68,7 @@ function cardDragStart(event) {
   event.dataTransfer.dropEffect = "move";
   event.dataTransfer.setData("bubbleIdx", bubbleIdx);
   event.dataTransfer.setData("selfIdx", selfIdx);
+  moveWrapper = false;
 }
 
 function delCardHandler(delCardBtn, bubbleIdx, selfIdx) {
@@ -289,6 +296,9 @@ function drawBubbles() {
     bubble.querySelector(".bubble-title").addEventListener("drop", cardDropped);
     bubble
       .querySelector(".bubble-title")
+      .addEventListener("mousemove", preventMoveWrapper);
+    bubble
+      .querySelector(".bubble-title")
       .addEventListener("dragover", cardDragOver);
     bubble.querySelector(".drops").addEventListener("mouseleave", dropBtnBlur);
     bubble.querySelector(".add-card").addEventListener("click", addCardClick);
@@ -303,6 +313,9 @@ function drawBubbles() {
       card.addEventListener("dragstart", cardDragStart);
       card.addEventListener("dragover", cardDragOver);
       card.addEventListener("drop", cardDropped);
+      card.addEventListener("dragend", preventMoveWrapper);
+      card.addEventListener("mousemove", preventMoveWrapper);
+      card.addEventListener("mouseenter", preventMoveWrapper);
 
       bubble.querySelector(".bubble-content").appendChild(card);
       card.addEventListener("click", cardClicked);
@@ -310,10 +323,33 @@ function drawBubbles() {
   });
 }
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+function preventMoveWrapper(event) {
+  moveWrapper = false;
+}
+function wrapperMouseDown(event) {
+  moveWrapper = true;
+  wrapperX = event.clientX;
+}
+function wrapperMouseMove(event) {
+  if (moveWrapper === true) {
+    aa = wrapperX - event.clientX;
+    wrapperX = event.clientX;
+    wrapper.scrollLeft = wrapper.scrollLeft + aa;
+  }
+}
+function wrapperMouseUp(event) {
+  moveWrapper = false;
+}
+function wrapperMouseLeave() {
+  moveWrapper = false;
+}
 function init() {
   addListBtn.addEventListener("click", addListBtnClick);
 
+  wrapper.addEventListener("mousedown", wrapperMouseDown);
+  wrapper.addEventListener("mousemove", wrapperMouseMove);
+  wrapper.addEventListener("mouseup", wrapperMouseUp);
+  wrapper.addEventListener("mouseleave", wrapperMouseLeave);
   if (localStorage.getItem("trolloList")) {
     drawBubbles();
   }
